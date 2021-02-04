@@ -19,22 +19,30 @@ class PostTableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
+        self.layoutIfNeeded()
+        self.avatarImage.layer.cornerRadius = self.avatarImage.frame.height / 2.0
+        self.avatarImage.layer.masksToBounds = true
         super.awakeFromNib()
         // Initialization codes
     }
     
     var post : Post?{
         didSet{
-            self.setText()
+            if let item = self.post {
+                self.descriptionLabel.text = item.body
+                self.titleLabel.text = item.title
+            }
         }
     }
     
-    func setText() {
-        if let item = self.post {
-            self.descriptionLabel.text = item.body
-            self.titleLabel.text = item.title
-//            if let urlImg =  URL(string: item.)
-//            imageView.sd_setImage(with: , placeholderImage: UIImage(named: "placeholder.png"))
+    var user : User?{
+        didSet{
+            if let item = self.user {
+                self.usernameLabel.text = item.username
+                if let avatar = item.avatar, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "load.png"){
+                    self.avatarImage?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
+                }
+            }
         }
     }
     

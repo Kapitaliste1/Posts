@@ -11,52 +11,27 @@ import UIKit
 class PostTableViewController: UITableViewController {
 
     var postArray : [Post]?
-    
+    var usersArray : [User]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerCells()
-        
-        PostRepository.shared.retrievePosts { (postsData) in
-            if let posts = postsData, !posts.isEmpty {
-                self.postArray = posts
-                self.tableView.reloadData()
-            }else{
-                self.prensentFailedAlertToReload()
-            }
-        }
-         
+        self.getPosts()
     }
     
-    func registerCells()
-    {
-        let cell = UINib(nibName: PostTableViewCell.identifier, bundle:nil)
-        self.tableView.register(cell,forCellReuseIdentifier: PostTableViewCell.identifier)
-    }
-    
-    func prensentFailedAlertToReload(){
-        let alertController = UIAlertController(title: "Alert", message: "We are facing troubles to load the data, please dismiss this alert to retry.", preferredStyle: .alert)
-        
-        let action1 = UIAlertAction(title: "Dismiss", style: .destructive) { (action:UIAlertAction) in
-            PostRepository.shared.retrievePosts { (postsData) in
-                if let posts = postsData, !posts.isEmpty {
-                    self.postArray = posts
-                    self.tableView.reloadData()
-                }else{
-                    self.prensentFailedAlertToReload()
-                }
-            }
-        }
-        
-        alertController.addAction(action1)
-        self.present(alertController, animated: true, completion: nil)
-    }
 
 }
 
 
-//
+//MARK: - Table view Management
 extension PostTableViewController {
-    // MARK: - Table view data source
+    
+    fileprivate func registerCells()
+    {
+        let cell = UINib(nibName: PostTableViewCell.identifier, bundle:nil)
+        self.tableView.register(cell,forCellReuseIdentifier: PostTableViewCell.identifier)
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
          return 1
     }
@@ -69,10 +44,60 @@ extension PostTableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell {
             if let post = self.postArray?[indexPath.row]{
                 cell.post = post
+                if let postOwner = self.usersArray?.filter({ $0.id == post.userId }), !postOwner.isEmpty{
+                    cell.user = postOwner.first
+                }
             }
             return cell
         }
         return UITableViewCell()
     }
     
+}
+
+
+//MARK: - Data Retrieval
+extension PostTableViewController {
+    fileprivate func getPosts() {
+        PostRepository.shared.retrievePosts { (postsData) in
+            if let posts = postsData, !posts.isEmpty {
+                self.postArray = posts
+                self.getUsers { (result) in
+                    if result {
+                        self.tableView.reloadData()
+                    }else{
+                        self.prensentFailedAlertToReload()
+                    }
+                }
+            }else{
+                self.prensentFailedAlertToReload()
+            }
+        }
+    }
+    
+    fileprivate func getUsers(completed : @escaping (Bool) -> Void) {
+        UserRepository.shared.retrieveUser { (usersData) in
+            if let users = usersData, !users.isEmpty {
+                self.usersArray = users
+                completed(true)
+            }else{
+                completed(false)
+            }
+        }
+    }
+    
+}
+
+
+//MARK: - Alert view
+extension PostTableViewController {
+    fileprivate func prensentFailedAlertToReload(){
+        let alertController = UIAlertController(title: "Alert", message: "We are facing troubles to load the data, please dismiss this alert to retry.", preferredStyle: .alert)
+        
+        let action1 = UIAlertAction(title: "Dismiss", style: .destructive) { (action:UIAlertAction) in
+            self.getPosts()
+        }
+        alertController.addAction(action1)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
