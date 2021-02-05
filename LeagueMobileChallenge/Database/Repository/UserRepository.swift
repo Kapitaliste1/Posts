@@ -32,6 +32,7 @@ class UserRepository {
                     if let jsonRawData = data as? Data{
                         let jsonParsed = try JSONSerialization.jsonObject(with: jsonRawData, options: .allowFragments) as! [[String : AnyObject]]
                         users = Mapper<User>().mapArray(JSONArray:jsonParsed)
+                        
                         successHandler(users)
                     }
                 } catch let parseError {

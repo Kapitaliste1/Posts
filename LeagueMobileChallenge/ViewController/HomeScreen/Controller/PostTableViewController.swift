@@ -12,13 +12,14 @@ class PostTableViewController: UITableViewController {
     
     var postArray : [Post]?
     var usersArray : [User]?
+    var albumsArray : [Album]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerCells()
         self.getPosts()
     }
-     
+    
     
 }
 
@@ -62,8 +63,8 @@ extension PostTableViewController {
     fileprivate func getPosts() {
         PostRepository.shared.retrievePosts { (postsData) in
             self.postArray = postsData
-            self.getUsers { (result) in
-                if result {
+            self.getUsers {
+                self.getAlbums {
                     self.tableView.reloadData()
                 }
             }
@@ -72,20 +73,30 @@ extension PostTableViewController {
                 self.getPosts()
             }
             self.present(alertController, animated: true, completion: nil)
-
         }
         
     }
     
-    fileprivate func getUsers(completed : @escaping (Bool) -> Void) {
+    fileprivate func getUsers(completed : @escaping () -> Void) {
         UserRepository.shared.retrieveUser(successHandler: { (usersData) in
             self.usersArray = usersData
-            completed(true)
+            completed()
         }, failureHandler: { (error) in
             let alertController = self.prensentFailedAlert(error: error) {}
             self.present(alertController, animated: true, completion: nil)
-            completed(false)
+            completed()
         })
+    }
+    
+    fileprivate func getAlbums(completed : @escaping () -> Void){
+        AlbumRepository.shared.retrieveAlbums { (albumsData) in
+            self.albumsArray = albumsData
+            completed()
+        } failureHandler: { (error) in
+            let alertController = self.prensentFailedAlert(error: error) {}
+            self.present(alertController, animated: true, completion: nil)
+            completed()
+        }
     }
     
 }
@@ -94,8 +105,10 @@ extension PostTableViewController {
 //MARK: - User detail navigation delegate from PostTableViewCell
 extension PostTableViewController : PostTableViewCellProtocol{
     func showUserDetail(user: User) {
-        if let userDetailVC = self.navigateTo(storyboard: .UserDetail) as? UserDetailsViewController{
+        if let userDetailVC = self.navigateTo(storyboard: .UserDetail) as? UserDetailsViewController,
+           let currentUserAlbum = self.albumsArray?.filter({ $0.userId == user.id}){
             userDetailVC.user = user
+            userDetailVC.albumArray = currentUserAlbum
             self.navigationController?.show(userDetailVC, sender: self)
         }
     }

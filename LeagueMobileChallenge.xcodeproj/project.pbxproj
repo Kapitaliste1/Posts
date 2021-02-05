@@ -29,6 +29,8 @@
 		AB91AD8F25CB6FAB006417B9 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD8E25CB6FAB006417B9 /* AddressRepository.swift */; };
 		AB91AD9425CB701D006417B9 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD9325CB701D006417B9 /* UserRepository.swift */; };
 		ABAC49FD25CCDA5600ED1C71 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */; };
+		ABED710A25CD25310073D580 /* AlbumThumnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED710825CD25310073D580 /* AlbumThumnailCollectionViewCell.swift */; };
+		ABED710B25CD25310073D580 /* AlbumThumnailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABED710925CD25310073D580 /* AlbumThumnailCollectionViewCell.xib */; };
 		ABEFC09225CCC73300E5C233 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEFC09125CCC73300E5C233 /* UserDetail.storyboard */; };
 		ABEFC09725CCC76700E5C233 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEFC09625CCC76700E5C233 /* UserDetailsViewController.swift */; };
 		ABF6C25F25CAE0D900D839F4 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF6C25E25CAE0D900D839F4 /* PostTableViewController.swift */; };
@@ -89,6 +91,8 @@
 		AB91AD8E25CB6FAB006417B9 /* AddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepository.swift; sourceTree = "<group>"; };
 		AB91AD9325CB701D006417B9 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
+		ABED710825CD25310073D580 /* AlbumThumnailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumThumnailCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABED710925CD25310073D580 /* AlbumThumnailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumThumnailCollectionViewCell.xib; sourceTree = "<group>"; };
 		ABEFC09125CCC73300E5C233 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
 		ABEFC09625CCC76700E5C233 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		ABF6C25E25CAE0D900D839F4 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +179,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		ABED710725CD25010073D580 /* AlbumThumnail */ = {
+			isa = PBXGroup;
+			children = (
+				ABED710825CD25310073D580 /* AlbumThumnailCollectionViewCell.swift */,
+				ABED710925CD25310073D580 /* AlbumThumnailCollectionViewCell.xib */,
+			);
+			path = AlbumThumnail;
+			sourceTree = "<group>";
+		};
 		ABF6C23B25CADE2300D839F4 /* UserDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +209,7 @@
 		ABF6C23D25CADE3C00D839F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ABED710725CD25010073D580 /* AlbumThumnail */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -467,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABED710B25CD25310073D580 /* AlbumThumnailCollectionViewCell.xib in Resources */,
 				B6AC695C21E6578F0094A9B1 /* LaunchScreen.storyboard in Resources */,
 				B6AC695921E6578F0094A9B1 /* Assets.xcassets in Resources */,
 				ABEFC09225CCC73300E5C233 /* UserDetail.storyboard in Resources */,
@@ -592,6 +607,7 @@
 				AB91AD2525CAF16D006417B9 /* Address+CoreDataClass.swift in Sources */,
 				AB91AD2A25CAF16D006417B9 /* Album+CoreDataProperties.swift in Sources */,
 				AB91AD2025CAF16D006417B9 /* User+CoreDataProperties.swift in Sources */,
+				ABED710A25CD25310073D580 /* AlbumThumnailCollectionViewCell.swift in Sources */,
 				AB91AD8025CB6F41006417B9 /* PostRepository.swift in Sources */,
 				AB91AD8A25CB6F8F006417B9 /* CompanyRepository.swift in Sources */,
 				AB91AD2825CAF16D006417B9 /* Geolocation+CoreDataProperties.swift in Sources */,

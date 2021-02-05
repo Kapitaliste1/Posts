@@ -11,20 +11,21 @@ import MessageUI
 
 class UserDetailsViewController: UIViewController {
     var user : User?
-    
+    var albumArray : [Album]?
+ 
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var websiteTextView: UITextView!
-    
+    var cellWidth : CGFloat = 150
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.registerCells()
         self.setUserDetailsView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        self.collectionView.reloadData()
     }
     
     
@@ -88,4 +89,51 @@ extension UserDetailsViewController : MFMailComposeViewControllerDelegate{
     }
 }
 
+
+//MARK: - Album collection view
+extension UserDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    func registerCells() {
+        self.cellWidth = (self.collectionView.frame.width / 3) - 30
+        let cell = UINib(nibName: AlbumThumnailCollectionViewCell.identifier, bundle: nil)
+        self.collectionView.register(cell, forCellWithReuseIdentifier: AlbumThumnailCollectionViewCell.identifier)
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.albumArray?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cell : UICollectionViewCell = UICollectionViewCell()
+        
+        if let thumnailCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumThumnailCollectionViewCell.identifier, for: indexPath) as? AlbumThumnailCollectionViewCell{
+            thumnailCell.widthConstraint.constant = (self.cellWidth - 10)
+            thumnailCell.album =  self.albumArray?[indexPath.row]
+            cell = thumnailCell
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.cellWidth, height: self.cellWidth)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
+    
+}
 
