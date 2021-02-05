@@ -13,9 +13,9 @@ class PostRepository {
     
     static let shared = PostRepository()
     
-    func retrievePosts(completed : @escaping ([Post]?) -> Void){
+    func retrievePosts(successHandler : @escaping ([Post]) -> Void, failureHandler : @escaping (Error) -> Void){
         var posts : [Post] = [Post]()
-        if let url : URL = URL(string: APIController.shared.postsAPI){
+        if let url : URL = URL(string: APIController.shared.postsAPI), APIController.shared.checkInternetAvalability(){
             APIController.shared.request(url: url) { (data, error) in
                 
                 guard error == nil else {
@@ -24,7 +24,7 @@ class PostRepository {
                             guard erroUserToken == nil else {
                                 return
                             }
-                            completed(nil)
+                            failureHandler(RequestError.userTokenIsNill)
                         }
                     }
                     return
@@ -33,15 +33,14 @@ class PostRepository {
                     if let jsonRawData = data as? Data{
                         let jsonParsed = try JSONSerialization.jsonObject(with: jsonRawData, options: .allowFragments) as! [[String : AnyObject]]
                         posts = Mapper<Post>().mapArray(JSONArray:jsonParsed)
-                        completed(posts)
+                        successHandler(posts)
                     }
                 } catch let parseError {
-                    print("JSON Error \(parseError.localizedDescription)")
-                    completed(nil)
+                    failureHandler(parseError)
                 }
             }
         }else{
-            completed(nil)
+            failureHandler(RequestError.noInternetConntion)
         }
     }
 }

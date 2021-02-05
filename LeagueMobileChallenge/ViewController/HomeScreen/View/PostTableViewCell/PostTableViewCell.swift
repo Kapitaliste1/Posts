@@ -9,9 +9,13 @@
 import UIKit
 import SDWebImage
 
+protocol PostTableViewCellProtocol {
+    func showUserDetail(user : User)
+}
+
 class PostTableViewCell: UITableViewCell {
     static let identifier : String = "PostTableViewCell"
-    
+    var delegate : PostTableViewCellProtocol?
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,9 +23,6 @@ class PostTableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
-        self.layoutIfNeeded()
-        self.avatarImage.layer.cornerRadius = self.avatarImage.frame.height / 2.0
-        self.avatarImage.layer.masksToBounds = true
         super.awakeFromNib()
         // Initialization codes
     }
@@ -43,6 +44,13 @@ class PostTableViewCell: UITableViewCell {
                     self.avatarImage?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
                 }
             }
+        }
+    }
+    
+    
+    @IBAction func showUserDetail(_ sender: UIButton) {
+        if let del = self.delegate, let currentUser = self.user {
+            del.showUserDetail(user: currentUser)
         }
     }
     

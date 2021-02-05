@@ -13,9 +13,9 @@ class UserRepository {
     
     static let shared = UserRepository()
     
-    func retrieveUser(completed : @escaping ([User]?) -> Void){
+    func retrieveUser(successHandler : @escaping ([User]) -> Void, failureHandler : @escaping (Error) -> Void){
         var users : [User] = [User]()
-        if let url : URL = URL(string: APIController.shared.usersAPI){
+        if let url : URL = URL(string: APIController.shared.usersAPI), APIController.shared.checkInternetAvalability(){
             APIController.shared.request(url: url) { (data, error) in
                 guard error == nil else {
                     if let foundError = error as? RequestError, foundError == RequestError.userTokenIsNill{
@@ -23,7 +23,7 @@ class UserRepository {
                             guard erroUserToken == nil else {
                                 return
                             }
-                            completed(nil)
+                            failureHandler(RequestError.userTokenIsNill)
                         }
                     }
                     return
@@ -32,16 +32,14 @@ class UserRepository {
                     if let jsonRawData = data as? Data{
                         let jsonParsed = try JSONSerialization.jsonObject(with: jsonRawData, options: .allowFragments) as! [[String : AnyObject]]
                         users = Mapper<User>().mapArray(JSONArray:jsonParsed)
-                        print("## \(users)")
-                        completed(users)
+                        successHandler(users)
                     }
                 } catch let parseError {
-                    print("JSON Error \(parseError.localizedDescription)")
-                    completed(nil)
+                    failureHandler(parseError)
                 }
             }
         }else{
-            completed(nil)
+            failureHandler(RequestError.noInternetConntion)
         }
     }
 }

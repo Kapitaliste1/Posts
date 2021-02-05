@@ -12,6 +12,9 @@ import Alamofire
 public enum RequestError : Error {
     case userTokenIsNill
     case requestFailed
+    case noInternetConntion
+    case emailAccountUnavailable
+    case wrongPhoneNumberFormat
 }
 
 class APIController {
@@ -60,9 +63,13 @@ class APIController {
         let authHeader: HTTPHeaders = ["x-access-token" : userToken]
         
         AF.request(url, method: .get
-            , parameters: nil, encoding: URLEncoding.default, headers: authHeader).responseJSON { (response) in
-                completion(response.data, response.error)
-        }
+                   , parameters: nil, encoding: URLEncoding.default, headers: authHeader).responseJSON { (response) in
+                    completion(response.data, response.error)
+                   }
+    }
+    
+    func checkInternetAvalability() -> Bool {
+        return NetworkReachabilityManager()?.isReachable ?? false
     }
     
 }

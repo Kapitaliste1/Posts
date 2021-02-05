@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A864FF656992546AD7C544F /* Pods_LeagueMobileChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E973EA07DC680BB29B1002A /* Pods_LeagueMobileChallengeTests.framework */; };
 		5BD7C54FA60BB7570A693C71 /* Pods_LeagueMobileChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09417A2435F74B6BBD872D0B /* Pods_LeagueMobileChallengeUITests.framework */; };
+		AB73382825CCEC68004728BA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB73382725CCEC68004728BA /* UIViewExtension.swift */; };
+		AB73383025CCF682004728BA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB73382F25CCF682004728BA /* MessageUI.framework */; };
 		AB91AD1F25CAF16D006417B9 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD1325CAF16D006417B9 /* User+CoreDataClass.swift */; };
 		AB91AD2025CAF16D006417B9 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD1425CAF16D006417B9 /* User+CoreDataProperties.swift */; };
 		AB91AD2125CAF16D006417B9 /* Company+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD1525CAF16D006417B9 /* Company+CoreDataClass.swift */; };
@@ -26,6 +28,9 @@
 		AB91AD8A25CB6F8F006417B9 /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD8925CB6F8F006417B9 /* CompanyRepository.swift */; };
 		AB91AD8F25CB6FAB006417B9 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD8E25CB6FAB006417B9 /* AddressRepository.swift */; };
 		AB91AD9425CB701D006417B9 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD9325CB701D006417B9 /* UserRepository.swift */; };
+		ABAC49FD25CCDA5600ED1C71 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */; };
+		ABEFC09225CCC73300E5C233 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEFC09125CCC73300E5C233 /* UserDetail.storyboard */; };
+		ABEFC09725CCC76700E5C233 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEFC09625CCC76700E5C233 /* UserDetailsViewController.swift */; };
 		ABF6C25F25CAE0D900D839F4 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF6C25E25CAE0D900D839F4 /* PostTableViewController.swift */; };
 		ABF6C26725CAE10000D839F4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF6C26525CAE10000D839F4 /* PostTableViewCell.swift */; };
 		ABF6C26A25CAE10000D839F4 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABF6C26625CAE10000D839F4 /* PostTableViewCell.xib */; };
@@ -64,6 +69,8 @@
 		11B8BED4C0B2E47F947C8F53 /* Pods-LeagueMobileChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeagueMobileChallengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeagueMobileChallengeTests/Pods-LeagueMobileChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		71E420C2560A70D44F192FFD /* Pods-LeagueMobileChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeagueMobileChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeagueMobileChallenge/Pods-LeagueMobileChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		9E973EA07DC680BB29B1002A /* Pods_LeagueMobileChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeagueMobileChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB73382725CCEC68004728BA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		AB73382F25CCF682004728BA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		AB91AD1325CAF16D006417B9 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AB91AD1425CAF16D006417B9 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AB91AD1525CAF16D006417B9 /* Company+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Company+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -81,6 +88,9 @@
 		AB91AD8925CB6F8F006417B9 /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		AB91AD8E25CB6FAB006417B9 /* AddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepository.swift; sourceTree = "<group>"; };
 		AB91AD9325CB701D006417B9 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
+		ABEFC09125CCC73300E5C233 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
+		ABEFC09625CCC76700E5C233 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		ABF6C25E25CAE0D900D839F4 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
 		ABF6C26525CAE10000D839F4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		ABF6C26625CAE10000D839F4 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -108,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB73383025CCF682004728BA /* MessageUI.framework in Frameworks */,
 				C711E601661AAB36D173F831 /* Pods_LeagueMobileChallenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +158,7 @@
 		40816A92C89E63A0A9F413CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB73382F25CCF682004728BA /* MessageUI.framework */,
 				B5EC5EC130097654F1E0F3C6 /* Pods_LeagueMobileChallenge.framework */,
 				9E973EA07DC680BB29B1002A /* Pods_LeagueMobileChallengeTests.framework */,
 				09417A2435F74B6BBD872D0B /* Pods_LeagueMobileChallengeUITests.framework */,
@@ -154,12 +166,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ABAC49FB25CCD9A700ED1C71 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */,
+				AB73382725CCEC68004728BA /* UIViewExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		ABF6C23B25CADE2300D839F4 /* UserDetail */ = {
 			isa = PBXGroup;
 			children = (
 				ABF6C23E25CADE4500D839F4 /* Controller */,
-				ABF6C23D25CADE3C00D839F4 /* View */,
 				ABF6C23C25CADE3400D839F4 /* Interface */,
+				ABF6C23D25CADE3C00D839F4 /* View */,
 			);
 			path = UserDetail;
 			sourceTree = "<group>";
@@ -167,6 +188,7 @@
 		ABF6C23C25CADE3400D839F4 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ABEFC09125CCC73300E5C233 /* UserDetail.storyboard */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -181,6 +203,7 @@
 		ABF6C23E25CADE4500D839F4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				ABEFC09625CCC76700E5C233 /* UserDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -217,9 +240,9 @@
 		ABF6C24125CADED600D839F4 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				B6AC69A121ECEC740094A9B1 /* APIController.swift */,
 				AB91AD8E25CB6FAB006417B9 /* AddressRepository.swift */,
 				AB91AD8425CB6F57006417B9 /* AlbumRepository.swift */,
-				B6AC69A121ECEC740094A9B1 /* APIController.swift */,
 				AB91AD8925CB6F8F006417B9 /* CompanyRepository.swift */,
 				AB91AD7F25CB6F41006417B9 /* PostRepository.swift */,
 				AB91AD9325CB701D006417B9 /* UserRepository.swift */,
@@ -230,20 +253,20 @@
 		ABF6C24225CADF2000D839F4 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				ABF6C24325CADF8C00D839F4 /* LandingPage */,
+				ABF6C24325CADF8C00D839F4 /* HomeScreen */,
 				ABF6C23B25CADE2300D839F4 /* UserDetail */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		ABF6C24325CADF8C00D839F4 /* LandingPage */ = {
+		ABF6C24325CADF8C00D839F4 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
 				ABF6C24625CADFB400D839F4 /* Controller */,
 				ABF6C24525CADFA700D839F4 /* Interface */,
 				ABF6C24425CADF9D00D839F4 /* View */,
 			);
-			path = LandingPage;
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		ABF6C24425CADF9D00D839F4 /* View */ = {
@@ -304,6 +327,7 @@
 		B6AC694D21E6578D0094A9B1 /* LeagueMobileChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				ABAC49FB25CCD9A700ED1C71 /* Extension */,
 				B6AC694E21E6578D0094A9B1 /* AppDelegate.swift */,
 				B6AC695821E6578F0094A9B1 /* Assets.xcassets */,
 				ABF6C24025CADE8800D839F4 /* Database */,
@@ -445,6 +469,7 @@
 			files = (
 				B6AC695C21E6578F0094A9B1 /* LaunchScreen.storyboard in Resources */,
 				B6AC695921E6578F0094A9B1 /* Assets.xcassets in Resources */,
+				ABEFC09225CCC73300E5C233 /* UserDetail.storyboard in Resources */,
 				B6AC695421E6578D0094A9B1 /* Main.storyboard in Resources */,
 				ABF6C26A25CAE10000D839F4 /* PostTableViewCell.xib in Resources */,
 			);
@@ -557,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB73382825CCEC68004728BA /* UIViewExtension.swift in Sources */,
 				AB91AD9425CB701D006417B9 /* UserRepository.swift in Sources */,
 				B6AC695721E6578D0094A9B1 /* LeagueMobileChallenge.xcdatamodeld in Sources */,
 				AB91AD2125CAF16D006417B9 /* Company+CoreDataClass.swift in Sources */,
@@ -569,10 +595,12 @@
 				AB91AD8025CB6F41006417B9 /* PostRepository.swift in Sources */,
 				AB91AD8A25CB6F8F006417B9 /* CompanyRepository.swift in Sources */,
 				AB91AD2825CAF16D006417B9 /* Geolocation+CoreDataProperties.swift in Sources */,
+				ABEFC09725CCC76700E5C233 /* UserDetailsViewController.swift in Sources */,
 				AB91AD2225CAF16D006417B9 /* Company+CoreDataProperties.swift in Sources */,
 				ABF6C26725CAE10000D839F4 /* PostTableViewCell.swift in Sources */,
 				AB91AD2925CAF16D006417B9 /* Album+CoreDataClass.swift in Sources */,
 				AB91AD2425CAF16D006417B9 /* Post+CoreDataProperties.swift in Sources */,
+				ABAC49FD25CCDA5600ED1C71 /* NavigationExtension.swift in Sources */,
 				AB91AD2625CAF16D006417B9 /* Address+CoreDataProperties.swift in Sources */,
 				AB91AD2725CAF16D006417B9 /* Geolocation+CoreDataClass.swift in Sources */,
 				AB91AD2325CAF16D006417B9 /* Post+CoreDataClass.swift in Sources */,
@@ -757,13 +785,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RHN4E42P4E;
+				DEVELOPMENT_TEAM = V99E2QDT83;
 				INFOPLIST_FILE = LeagueMobileChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.league.mobileChallenge.LeagueMobileChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.league.mobileChallenge.LeagueMobileChallengeJonathan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -776,13 +804,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RHN4E42P4E;
+				DEVELOPMENT_TEAM = V99E2QDT83;
 				INFOPLIST_FILE = LeagueMobileChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.league.mobileChallenge.LeagueMobileChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.league.mobileChallenge.LeagueMobileChallengeJonathan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
