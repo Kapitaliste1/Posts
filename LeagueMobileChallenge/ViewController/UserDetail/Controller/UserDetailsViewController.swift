@@ -12,6 +12,7 @@ import MessageUI
 class UserDetailsViewController: UIViewController {
     var user : User?
     var albumArray : [Album]?
+    var photosArray : [Photo]?
  
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -36,8 +37,7 @@ class UserDetailsViewController: UIViewController {
             mail.setToRecipients([destinator])
             present(mail, animated: true)
         } else {
-            let alertController = self.prensentFailedAlert(error: RequestError.emailAccountUnavailable) {}
-            self.present(alertController, animated: true, completion: nil)
+            self.prensentFailedAlert(error: RequestError.emailAccountUnavailable) {}
         }
     }
     
@@ -49,8 +49,7 @@ class UserDetailsViewController: UIViewController {
                 
             })
         }else{
-            let alertController = self.prensentFailedAlert(error: RequestError.wrongPhoneNumberFormat) {}
-            self.present(alertController, animated: true, completion: nil)
+           self.prensentFailedAlert(error: RequestError.wrongPhoneNumberFormat) {}
         }
     }
     
@@ -111,7 +110,7 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
         
         if let thumnailCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumThumnailCollectionViewCell.identifier, for: indexPath) as? AlbumThumnailCollectionViewCell{
             thumnailCell.widthConstraint.constant = (self.cellWidth - 10)
-            thumnailCell.album =  self.albumArray?[indexPath.row]
+//            thumnailCell.album =  self.albumArray?[indexPath.row]
             cell = thumnailCell
         }
         
@@ -133,6 +132,15 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectedAlbum = self.albumArray?[indexPath.row]{
+            if let photoVC = self.navigateTo(storyboard: .UserDetail, viewControllerIdentifier: .PhotoViewController) as? PhotoViewController{
+                photoVC.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.present(photoVC, animated: true, completion: nil)
+            }
+        }
     }
     
 }

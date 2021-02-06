@@ -1,8 +1,8 @@
 //
-//  AlbumRepository.swift
+//  PhotoRepository.swift
 //  LeagueMobileChallenge
 //
-//  Created by Jonathan Ngabo on 2021-02-03.
+//  Created by Jonathan Ngabo on 2021-02-05.
 //  Copyright © 2021 Kelvin Lau. All rights reserved.
 //
 
@@ -10,20 +10,21 @@ import Foundation
 import ObjectMapper
 import CoreData
 
-class AlbumRepository {
+
+class PhotoRepository {
     
-    static let shared = AlbumRepository()
+    static let shared = PhotoRepository()
     
-    func downloadAlbums(successHandler : @escaping ([Album]) -> Void, failureHandler : @escaping (Error) -> Void){
-        var albums : [Album] = [Album]()
-        if let url : URL = URL(string: APIController.shared.albumsAPI), APIController.shared.checkInternetAvalability(){
+    func downloadPhotos(successHandler : @escaping ([Photo]) -> Void, failureHandler : @escaping (Error) -> Void){
+        var photos : [Photo] = [Photo]()
+        if let url : URL = URL(string: APIController.shared.usersAPI), APIController.shared.checkInternetAvalability(){
             APIController.shared.request(url: url) { (data) in
                 do {
                     if let jsonRawData = data as? Data{
                         let jsonParsed = try JSONSerialization.jsonObject(with: jsonRawData, options: .allowFragments) as! [[String : AnyObject]]
-                        albums = Mapper<Album>().mapArray(JSONArray:jsonParsed)
-                        APIController.shared.saveBatchInLocalStorage(albums) { (savedData) in
-                            successHandler(albums)
+                        photos = Mapper<Photo>().mapArray(JSONArray:jsonParsed)
+                        APIController.shared.saveBatchInLocalStorage(photos) { (savedData) in
+                            successHandler(photos)
                         } failureHandler: { (error) in
                             failureHandler(error)
                         }
@@ -35,18 +36,18 @@ class AlbumRepository {
             } failureHandler: { (error) in
                 failureHandler(error)
             }
-            
         }else{
             failureHandler(RequestError.noInternetConntion)
         }
     }
     
-    func selectAll(successHandler : @escaping ([Album]) -> Void, failureHandler : @escaping (Error) -> Void) {
+    
+    func selectAll(successHandler : @escaping ([Photo]) -> Void, failureHandler : @escaping (Error) -> Void) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
         
         do {
-            if let array = try managedContext.fetch(Album.fetchRequest()) as? [Album]{
+            if let array = try managedContext.fetch(Photo.fetchRequest()) as? [Photo]{
                 successHandler(array)
             }else{
                 failureHandler(RequestError.fetchDataTransactionFailed)

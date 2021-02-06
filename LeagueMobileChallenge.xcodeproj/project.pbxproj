@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A864FF656992546AD7C544F /* Pods_LeagueMobileChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E973EA07DC680BB29B1002A /* Pods_LeagueMobileChallengeTests.framework */; };
 		5BD7C54FA60BB7570A693C71 /* Pods_LeagueMobileChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09417A2435F74B6BBD872D0B /* Pods_LeagueMobileChallengeUITests.framework */; };
+		AB4A933D25CE0FE3000839BB /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4A933C25CE0FE3000839BB /* LoginRepository.swift */; };
 		AB73382825CCEC68004728BA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB73382725CCEC68004728BA /* UIViewExtension.swift */; };
 		AB73383025CCF682004728BA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB73382F25CCF682004728BA /* MessageUI.framework */; };
 		AB91AD1F25CAF16D006417B9 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD1325CAF16D006417B9 /* User+CoreDataClass.swift */; };
@@ -28,7 +29,12 @@
 		AB91AD8A25CB6F8F006417B9 /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD8925CB6F8F006417B9 /* CompanyRepository.swift */; };
 		AB91AD8F25CB6FAB006417B9 /* AddressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD8E25CB6FAB006417B9 /* AddressRepository.swift */; };
 		AB91AD9425CB701D006417B9 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD9325CB701D006417B9 /* UserRepository.swift */; };
-		ABAC49FD25CCDA5600ED1C71 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */; };
+		AB9C7B7225CDAFC9007B2EE4 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C7B7125CDAFC9007B2EE4 /* PhotoViewController.swift */; };
+		AB9C7B7825CDC0CF007B2EE4 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C7B7625CDC0CF007B2EE4 /* Photo+CoreDataClass.swift */; };
+		AB9C7B7925CDC0CF007B2EE4 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C7B7725CDC0CF007B2EE4 /* Photo+CoreDataProperties.swift */; };
+		AB9C7B7E25CDC15A007B2EE4 /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C7B7D25CDC15A007B2EE4 /* PhotoRepository.swift */; };
+		AB9C7B8725CDF733007B2EE4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C7B8625CDF733007B2EE4 /* LoginViewController.swift */; };
+		AB9C7B8F25CDF745007B2EE4 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9C7B8E25CDF745007B2EE4 /* Login.storyboard */; };
 		ABED710A25CD25310073D580 /* AlbumThumnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED710825CD25310073D580 /* AlbumThumnailCollectionViewCell.swift */; };
 		ABED710B25CD25310073D580 /* AlbumThumnailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABED710925CD25310073D580 /* AlbumThumnailCollectionViewCell.xib */; };
 		ABEFC09225CCC73300E5C233 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABEFC09125CCC73300E5C233 /* UserDetail.storyboard */; };
@@ -71,6 +77,7 @@
 		11B8BED4C0B2E47F947C8F53 /* Pods-LeagueMobileChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeagueMobileChallengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeagueMobileChallengeTests/Pods-LeagueMobileChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		71E420C2560A70D44F192FFD /* Pods-LeagueMobileChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeagueMobileChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeagueMobileChallenge/Pods-LeagueMobileChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		9E973EA07DC680BB29B1002A /* Pods_LeagueMobileChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeagueMobileChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB4A933C25CE0FE3000839BB /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		AB73382725CCEC68004728BA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		AB73382F25CCF682004728BA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		AB91AD1325CAF16D006417B9 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -90,7 +97,12 @@
 		AB91AD8925CB6F8F006417B9 /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		AB91AD8E25CB6FAB006417B9 /* AddressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRepository.swift; sourceTree = "<group>"; };
 		AB91AD9325CB701D006417B9 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
-		ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
+		AB9C7B7125CDAFC9007B2EE4 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		AB9C7B7625CDC0CF007B2EE4 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AB9C7B7725CDC0CF007B2EE4 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AB9C7B7D25CDC15A007B2EE4 /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
+		AB9C7B8625CDF733007B2EE4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AB9C7B8E25CDF745007B2EE4 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		ABED710825CD25310073D580 /* AlbumThumnailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumThumnailCollectionViewCell.swift; sourceTree = "<group>"; };
 		ABED710925CD25310073D580 /* AlbumThumnailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumThumnailCollectionViewCell.xib; sourceTree = "<group>"; };
 		ABEFC09125CCC73300E5C233 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
@@ -170,10 +182,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AB9C7B8225CDF6F8007B2EE4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C7B8525CDF70E007B2EE4 /* Controller */,
+				AB9C7B8325CDF6FF007B2EE4 /* Interface */,
+				AB9C7B8425CDF707007B2EE4 /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AB9C7B8325CDF6FF007B2EE4 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C7B8E25CDF745007B2EE4 /* Login.storyboard */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		AB9C7B8425CDF707007B2EE4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AB9C7B8525CDF70E007B2EE4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C7B8625CDF733007B2EE4 /* LoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		ABAC49FB25CCD9A700ED1C71 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				ABAC49FC25CCDA5600ED1C71 /* NavigationExtension.swift */,
 				AB73382725CCEC68004728BA /* UIViewExtension.swift */,
 			);
 			path = Extension;
@@ -218,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				ABEFC09625CCC76700E5C233 /* UserDetailsViewController.swift */,
+				AB9C7B7125CDAFC9007B2EE4 /* PhotoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -225,6 +270,8 @@
 		ABF6C23F25CADE7900D839F4 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				AB9C7B7625CDC0CF007B2EE4 /* Photo+CoreDataClass.swift */,
+				AB9C7B7725CDC0CF007B2EE4 /* Photo+CoreDataProperties.swift */,
 				AB91AD1925CAF16D006417B9 /* Address+CoreDataClass.swift */,
 				AB91AD1A25CAF16D006417B9 /* Address+CoreDataProperties.swift */,
 				AB91AD1D25CAF16D006417B9 /* Album+CoreDataClass.swift */,
@@ -260,6 +307,8 @@
 				AB91AD8925CB6F8F006417B9 /* CompanyRepository.swift */,
 				AB91AD7F25CB6F41006417B9 /* PostRepository.swift */,
 				AB91AD9325CB701D006417B9 /* UserRepository.swift */,
+				AB9C7B7D25CDC15A007B2EE4 /* PhotoRepository.swift */,
+				AB4A933C25CE0FE3000839BB /* LoginRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -267,6 +316,7 @@
 		ABF6C24225CADF2000D839F4 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AB9C7B8225CDF6F8007B2EE4 /* Login */,
 				ABF6C24325CADF8C00D839F4 /* HomeScreen */,
 				ABF6C23B25CADE2300D839F4 /* UserDetail */,
 			);
@@ -483,6 +533,7 @@
 			files = (
 				ABED710B25CD25310073D580 /* AlbumThumnailCollectionViewCell.xib in Resources */,
 				B6AC695C21E6578F0094A9B1 /* LaunchScreen.storyboard in Resources */,
+				AB9C7B8F25CDF745007B2EE4 /* Login.storyboard in Resources */,
 				B6AC695921E6578F0094A9B1 /* Assets.xcassets in Resources */,
 				ABEFC09225CCC73300E5C233 /* UserDetail.storyboard in Resources */,
 				B6AC695421E6578D0094A9B1 /* Main.storyboard in Resources */,
@@ -606,22 +657,27 @@
 				AB91AD8525CB6F57006417B9 /* AlbumRepository.swift in Sources */,
 				AB91AD2525CAF16D006417B9 /* Address+CoreDataClass.swift in Sources */,
 				AB91AD2A25CAF16D006417B9 /* Album+CoreDataProperties.swift in Sources */,
+				AB4A933D25CE0FE3000839BB /* LoginRepository.swift in Sources */,
 				AB91AD2025CAF16D006417B9 /* User+CoreDataProperties.swift in Sources */,
 				ABED710A25CD25310073D580 /* AlbumThumnailCollectionViewCell.swift in Sources */,
 				AB91AD8025CB6F41006417B9 /* PostRepository.swift in Sources */,
 				AB91AD8A25CB6F8F006417B9 /* CompanyRepository.swift in Sources */,
+				AB9C7B8725CDF733007B2EE4 /* LoginViewController.swift in Sources */,
 				AB91AD2825CAF16D006417B9 /* Geolocation+CoreDataProperties.swift in Sources */,
 				ABEFC09725CCC76700E5C233 /* UserDetailsViewController.swift in Sources */,
 				AB91AD2225CAF16D006417B9 /* Company+CoreDataProperties.swift in Sources */,
+				AB9C7B7E25CDC15A007B2EE4 /* PhotoRepository.swift in Sources */,
 				ABF6C26725CAE10000D839F4 /* PostTableViewCell.swift in Sources */,
 				AB91AD2925CAF16D006417B9 /* Album+CoreDataClass.swift in Sources */,
 				AB91AD2425CAF16D006417B9 /* Post+CoreDataProperties.swift in Sources */,
-				ABAC49FD25CCDA5600ED1C71 /* NavigationExtension.swift in Sources */,
 				AB91AD2625CAF16D006417B9 /* Address+CoreDataProperties.swift in Sources */,
 				AB91AD2725CAF16D006417B9 /* Geolocation+CoreDataClass.swift in Sources */,
+				AB9C7B7825CDC0CF007B2EE4 /* Photo+CoreDataClass.swift in Sources */,
 				AB91AD2325CAF16D006417B9 /* Post+CoreDataClass.swift in Sources */,
+				AB9C7B7225CDAFC9007B2EE4 /* PhotoViewController.swift in Sources */,
 				B6AC69A221ECEC740094A9B1 /* APIController.swift in Sources */,
 				B6AC694F21E6578D0094A9B1 /* AppDelegate.swift in Sources */,
+				AB9C7B7925CDC0CF007B2EE4 /* Photo+CoreDataProperties.swift in Sources */,
 				AB91AD8F25CB6FAB006417B9 /* AddressRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

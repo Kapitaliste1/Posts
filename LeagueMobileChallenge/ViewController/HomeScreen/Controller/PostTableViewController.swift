@@ -13,11 +13,11 @@ class PostTableViewController: UITableViewController {
     var postArray : [Post]?
     var usersArray : [User]?
     var albumsArray : [Album]?
-    
+    var photosArray : [Photo]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerCells()
-        self.getPosts()
     }
     
     
@@ -53,50 +53,6 @@ extension PostTableViewController {
             return cell
         }
         return UITableViewCell()
-    }
-    
-}
-
-
-//MARK: - Data Retrieval
-extension PostTableViewController {
-    fileprivate func getPosts() {
-        PostRepository.shared.retrievePosts { (postsData) in
-            self.postArray = postsData
-            self.getUsers {
-                self.getAlbums {
-                    self.tableView.reloadData()
-                }
-            }
-        } failureHandler: { (error) in
-            let alertController =  self.prensentFailedAlert(error: error) {
-                self.getPosts()
-            }
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-    }
-    
-    fileprivate func getUsers(completed : @escaping () -> Void) {
-        UserRepository.shared.retrieveUser(successHandler: { (usersData) in
-            self.usersArray = usersData
-            completed()
-        }, failureHandler: { (error) in
-            let alertController = self.prensentFailedAlert(error: error) {}
-            self.present(alertController, animated: true, completion: nil)
-            completed()
-        })
-    }
-    
-    fileprivate func getAlbums(completed : @escaping () -> Void){
-        AlbumRepository.shared.retrieveAlbums { (albumsData) in
-            self.albumsArray = albumsData
-            completed()
-        } failureHandler: { (error) in
-            let alertController = self.prensentFailedAlert(error: error) {}
-            self.present(alertController, animated: true, completion: nil)
-            completed()
-        }
     }
     
 }

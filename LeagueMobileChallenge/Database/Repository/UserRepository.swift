@@ -8,39 +8,54 @@
 
 import Foundation
 import ObjectMapper
+import CoreData
 
 class UserRepository {
     
     static let shared = UserRepository()
     
-    func retrieveUser(successHandler : @escaping ([User]) -> Void, failureHandler : @escaping (Error) -> Void){
+    func downloadUser(successHandler : @escaping ([User]) -> Void, failureHandler : @escaping (Error) -> Void){
         var users : [User] = [User]()
         if let url : URL = URL(string: APIController.shared.usersAPI), APIController.shared.checkInternetAvalability(){
-            APIController.shared.request(url: url) { (data, error) in
-                guard error == nil else {
-                    if let foundError = error as? RequestError, foundError == RequestError.userTokenIsNill{
-                        APIController.shared.fetchUserToken(userName: "", password: "") { (erroUserToken) in
-                            guard erroUserToken == nil else {
-                                return
-                            }
-                            failureHandler(RequestError.userTokenIsNill)
-                        }
-                    }
-                    return
-                }
+            APIController.shared.request(url: url) { (data) in
                 do {
                     if let jsonRawData = data as? Data{
                         let jsonParsed = try JSONSerialization.jsonObject(with: jsonRawData, options: .allowFragments) as! [[String : AnyObject]]
                         users = Mapper<User>().mapArray(JSONArray:jsonParsed)
-                        
-                        successHandler(users)
+                        APIController.shared.saveBatchInLocalStorage(users) { (savedData) in
+                            successHandler(users)
+                        } failureHandler: { (error) in
+                            failureHandler(error)
+                        }
                     }
                 } catch let parseError {
                     failureHandler(parseError)
                 }
+            } failureHandler: { (error) in
+                failureHandler(error)
             }
         }else{
             failureHandler(RequestError.noInternetConntion)
         }
     }
+    
+    
+    
+    
+    func selectAll(successHandler : @escaping ([User]) -> Void, failureHandler : @escaping (Error) -> Void) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        do {
+            if let array = try managedContext.fetch(User.fetchRequest()) as? [User]{
+                successHandler(array)
+            }else{
+                failureHandler(RequestError.fetchDataTransactionFailed)
+            }
+        } catch let error {
+            failureHandler(error)
+        }
+    }
+    
+    
 }

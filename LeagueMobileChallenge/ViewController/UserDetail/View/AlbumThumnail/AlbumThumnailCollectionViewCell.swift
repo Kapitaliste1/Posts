@@ -12,17 +12,20 @@ class AlbumThumnailCollectionViewCell: UICollectionViewCell {
     static let identifier : String = "AlbumThumnailCollectionViewCell"
     
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var titleLabel: UILabel!
+
+    @IBOutlet weak var thumbNailImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    var album : Album?{
+    var photo : Photo?{
         didSet{
-            if let item = self.album{
-                self.titleLabel.text = item.title
+            if let item = self.photo{
+                if let avatar = item.thumbnailUrl, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "load.png"){
+                    self.thumbNailImage?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
+                }
             }
         }
     }

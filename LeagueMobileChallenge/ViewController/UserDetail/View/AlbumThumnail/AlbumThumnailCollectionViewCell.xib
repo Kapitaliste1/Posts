@@ -20,21 +20,18 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mw-fi-NBt" userLabel="ContainerView">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="vFA-CN-C3d">
-                                <rect key="frame" x="25" y="68" width="100" height="14.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uno-5c-RvK">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="ZYV-eS-Iff"/>
+                                    <constraint firstAttribute="width" secondItem="uno-5c-RvK" secondAttribute="height" id="4A2-0M-qfQ"/>
+                                    <constraint firstAttribute="height" constant="150" id="utO-Hx-r1H"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
-                            <constraint firstItem="vFA-CN-C3d" firstAttribute="centerY" secondItem="3mw-fi-NBt" secondAttribute="centerY" id="cci-AM-MO7"/>
-                            <constraint firstItem="vFA-CN-C3d" firstAttribute="centerX" secondItem="3mw-fi-NBt" secondAttribute="centerX" id="um8-lq-4MF"/>
+                            <constraint firstItem="uno-5c-RvK" firstAttribute="centerX" secondItem="3mw-fi-NBt" secondAttribute="centerX" id="3MT-pj-yaG"/>
+                            <constraint firstItem="uno-5c-RvK" firstAttribute="centerY" secondItem="3mw-fi-NBt" secondAttribute="centerY" id="kNc-l2-mbi"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -51,8 +48,8 @@
             </constraints>
             <size key="customSize" width="105" height="105"/>
             <connections>
-                <outlet property="titleLabel" destination="vFA-CN-C3d" id="hS1-C0-TrS"/>
-                <outlet property="widthConstraint" destination="ZYV-eS-Iff" id="ycT-YA-O9m"/>
+                <outlet property="thumbNailImage" destination="uno-5c-RvK" id="QY2-x1-Qae"/>
+                <outlet property="widthConstraint" destination="utO-Hx-r1H" id="wUN-8q-osm"/>
             </connections>
             <point key="canvasLocation" x="-452.89855072463774" y="-63.28125"/>
         </collectionViewCell>
