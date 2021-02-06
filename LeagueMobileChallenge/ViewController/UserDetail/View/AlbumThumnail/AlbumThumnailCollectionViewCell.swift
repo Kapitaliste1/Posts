@@ -23,7 +23,7 @@ class AlbumThumnailCollectionViewCell: UICollectionViewCell {
     var photo : Photo?{
         didSet{
             if let item = self.photo{
-                if let avatar = item.thumbnailUrl, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "load.png"){
+                if let avatar = item.thumbnailUrl, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "loading.png"){
                     self.thumbNailImage?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
                 }
             }

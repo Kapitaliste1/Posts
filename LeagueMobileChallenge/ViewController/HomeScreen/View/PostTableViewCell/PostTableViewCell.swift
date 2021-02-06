@@ -40,7 +40,7 @@ class PostTableViewCell: UITableViewCell {
         didSet{
             if let item = self.user {
                 self.usernameLabel.text = item.username
-                if let avatar = item.avatar, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "load.png"){
+                if let avatar = item.avatar, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "avatar.png"){
                     self.avatarImage?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
                 }
             }

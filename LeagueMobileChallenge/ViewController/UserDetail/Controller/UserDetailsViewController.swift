@@ -64,7 +64,7 @@ extension UserDetailsViewController{
             self.phoneButton.setTitle(currentUser.phone, for: .normal)
             self.websiteTextView.delegate = self
             self.websiteTextView.text = currentUser.website
-            if let avatar = currentUser.avatar, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "load.png"){
+            if let avatar = currentUser.avatar, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "avatar.png"){
                 self.avatarImageView?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
             }
         }
@@ -81,7 +81,7 @@ extension UserDetailsViewController: UITextViewDelegate {
 }
 
 
-//MARK: - View set up
+//MARK: - Mail set up
 extension UserDetailsViewController : MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
@@ -109,9 +109,15 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
         var cell : UICollectionViewCell = UICollectionViewCell()
         
         if let thumnailCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumThumnailCollectionViewCell.identifier, for: indexPath) as? AlbumThumnailCollectionViewCell{
-            thumnailCell.widthConstraint.constant = (self.cellWidth - 10)
-//            thumnailCell.album =  self.albumArray?[indexPath.row]
-            cell = thumnailCell
+            thumnailCell.widthConstraint.constant = self.cellWidth
+            if let albumId = self.albumArray?[indexPath.row].id{
+               PhotoRepository.shared.selectByAlbumId(albumId: albumId, successHandler: { (photoData) in
+                thumnailCell.photo = photoData
+                cell = thumnailCell
+               }) { (_) in
+                
+               }
+            }
         }
         
         return cell
@@ -135,11 +141,17 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let selectedAlbum = self.albumArray?[indexPath.row]{
-            if let photoVC = self.navigateTo(storyboard: .UserDetail, viewControllerIdentifier: .PhotoViewController) as? PhotoViewController{
-                photoVC.modalPresentationStyle = .overCurrentContext
-                self.navigationController?.present(photoVC, animated: true, completion: nil)
+        if let albumId = self.albumArray?[indexPath.row].id{
+            PhotoRepository.shared.selectByAlbumId(albumId: albumId, successHandler: { (photoData) in
+                if let photoVC = self.navigateTo(storyboard: .UserDetail, viewControllerIdentifier: .PhotoViewController) as? PhotoViewController{
+                    photoVC.photo = photoData
+                    photoVC.modalPresentationStyle = .overCurrentContext
+                    self.navigationController?.present(photoVC, animated: true, completion: nil)
+                }
+            }) { (_) in
+             
             }
+            
         }
     }
     

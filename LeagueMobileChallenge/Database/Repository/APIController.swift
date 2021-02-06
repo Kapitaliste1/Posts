@@ -98,11 +98,9 @@ class APIController {
 
         do{
             try managedContext.save()
-            print("## bravo")
             successHandler(createdEntities)
             
         }catch let savingError{
-            print("## there was an error")
             failureHandler(savingError)
 
         }

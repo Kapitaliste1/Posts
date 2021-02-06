@@ -58,4 +58,26 @@ class UserRepository {
     }
     
     
+    func selectById(id : Int16,successHandler : @escaping (User) -> Void, failureHandler : @escaping (Error) -> Void) {
+        let fetchRequest = User.fetchRequest()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.persistentContainer.viewContext
+ 
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+
+ 
+         do {
+            if let array = try managedContext.fetch(fetchRequest) as? [User], let item = array.first{
+                successHandler(item)
+            }else{
+                failureHandler(RequestError.fetchDataTransactionFailed)
+            }
+        } catch let error {
+            failureHandler(error)
+        }
+        
+    }
+    
+    
 }

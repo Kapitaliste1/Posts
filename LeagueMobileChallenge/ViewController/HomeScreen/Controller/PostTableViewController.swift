@@ -13,11 +13,14 @@ class PostTableViewController: UITableViewController {
     var postArray : [Post]?
     var usersArray : [User]?
     var albumsArray : [Album]?
-    var photosArray : [Photo]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerCells()
+        self.fetchData { (error) in
+            self.prensentFailedAlert(error: error) {
+            }
+        }
     }
     
     
@@ -66,6 +69,33 @@ extension PostTableViewController : PostTableViewCellProtocol{
             userDetailVC.user = user
             userDetailVC.albumArray = currentUserAlbum
             self.navigationController?.show(userDetailVC, sender: self)
+        }
+    }
+}
+
+
+//MARK:- Data loading
+extension PostTableViewController{
+    func fetchData(failureHandler : @escaping (Error) -> Void) {
+        self.usersArray?.removeAll()
+        self.postArray?.removeAll()
+        self.albumsArray?.removeAll()
+
+        UserRepository.shared.selectAll { (userData) in
+            self.usersArray = userData
+            PostRepository.shared.selectAll { (postData) in
+                self.postArray = postData
+                AlbumRepository.shared.selectAll { (albumData) in
+                    self.albumsArray = albumData
+                    self.tableView.reloadData()
+                } failureHandler: { (error) in
+                    failureHandler(error)
+                }
+            } failureHandler: { (error) in
+                failureHandler(error)
+            }
+        } failureHandler: { (error) in
+            failureHandler(error)
         }
     }
 }

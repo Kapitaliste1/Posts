@@ -17,7 +17,7 @@ class PhotoRepository {
     
     func downloadPhotos(successHandler : @escaping ([Photo]) -> Void, failureHandler : @escaping (Error) -> Void){
         var photos : [Photo] = [Photo]()
-        if let url : URL = URL(string: APIController.shared.usersAPI), APIController.shared.checkInternetAvalability(){
+        if let url : URL = URL(string: APIController.shared.photosAPI), APIController.shared.checkInternetAvalability(){
             APIController.shared.request(url: url) { (data) in
                 do {
                     if let jsonRawData = data as? Data{
@@ -57,4 +57,24 @@ class PhotoRepository {
         }
     }
     
+    func selectByAlbumId(albumId : Int16,successHandler : @escaping (Photo) -> Void, failureHandler : @escaping (Error) -> Void) {
+        let fetchRequest = Photo.fetchRequest()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.persistentContainer.viewContext
+ 
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "albumId == %d", albumId)
+
+         do {
+            if let array = try managedContext.fetch(fetchRequest) as? [Photo], let item = array.first{
+                successHandler(item)
+            }else{
+                failureHandler(RequestError.fetchDataTransactionFailed)
+            }
+        } catch let error {
+            failureHandler(error)
+        }
+        
+    }
+     
 }
