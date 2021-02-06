@@ -25,8 +25,11 @@ public class User: NSManagedObject, Mappable {
         let managedContext = appDelegate.persistentContainer.viewContext
         self.init(context : managedContext)
         self.mapping(map: map)
-        CompanyRepository.shared.downloadCompany(jsonDictionnary: map.JSON)
-        AddressRepository.shared.downloadAddress(jsonDictionnary: map.JSON)
+        CompanyRepository.shared.downloadCompany(jsonDictionnary: map.JSON) { (_) in
+            AddressRepository.shared.downloadAddress(jsonDictionnary: map.JSON) { (_) in
+            } failureHandler: { (_) in}
+        } failureHandler: { (_) in}
+
     }
     
     public func mapping(map: Map) {

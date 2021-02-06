@@ -14,14 +14,16 @@ class CompanyRepository {
     
     static let shared = CompanyRepository()
     
-    func downloadCompany(jsonDictionnary :[String : Any]){
+    func downloadCompany(jsonDictionnary :[String : Any],successHandler : @escaping ([Company]) -> Void, failureHandler : @escaping (Error) -> Void){
     
         if var companyJson =  jsonDictionnary["company"] as? [String: Any], let id = jsonDictionnary["id"] as? Int16{
             companyJson["userId"] = id
             var companies : [Company] = [Company]()
             companies = Mapper<Company>().mapArray(JSONArray:[companyJson])
             APIController.shared.saveBatchInLocalStorage(companies) { (savedData) in
-            } failureHandler: { (_) in
+                successHandler(companies)
+            } failureHandler: { (error) in
+                failureHandler(error)
             }
         }
     }

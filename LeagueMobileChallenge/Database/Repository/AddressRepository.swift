@@ -14,13 +14,15 @@ class AddressRepository {
     
     static let shared = AddressRepository()
     
-    func downloadAddress(jsonDictionnary :[String : Any]){
+    func downloadAddress(jsonDictionnary :[String : Any],successHandler : @escaping ([Address]) -> Void, failureHandler : @escaping (Error) -> Void){
         if var addressJson =  jsonDictionnary["address"] as? [String: Any], let id = jsonDictionnary["id"] as? Int16{
             addressJson["userId"] = id
             var addressArray : [Address] = [Address]()
             addressArray = Mapper<Address>().mapArray(JSONArray:[addressJson])
             APIController.shared.saveBatchInLocalStorage(addressArray) { (savedData) in
-            } failureHandler: { (_) in
+                successHandler(addressArray)
+            } failureHandler: { (error) in
+                failureHandler(error)
             }
         }
     }
