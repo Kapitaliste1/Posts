@@ -28,6 +28,7 @@ public class Company: NSManagedObject, Mappable {
     }
     
     public func mapping(map: Map) {
+        userId   <- (map["userId"])
         name   <- (map["name"])
         catchPhrase   <- (map["catchPhrase"])
         bs   <- (map["bs"])

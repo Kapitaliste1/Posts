@@ -25,6 +25,8 @@ public class User: NSManagedObject, Mappable {
         let managedContext = appDelegate.persistentContainer.viewContext
         self.init(context : managedContext)
         self.mapping(map: map)
+        CompanyRepository.shared.downloadCompany(jsonDictionnary: map.JSON)
+        AddressRepository.shared.downloadAddress(jsonDictionnary: map.JSON)
     }
     
     public func mapping(map: Map) {
@@ -35,6 +37,5 @@ public class User: NSManagedObject, Mappable {
         email   <- (map["email"])
         phone   <- (map["phone"])
         website   <- (map["website"])
-
     }
 }

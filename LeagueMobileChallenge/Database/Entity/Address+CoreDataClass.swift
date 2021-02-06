@@ -28,6 +28,7 @@ public class Address: NSManagedObject, Mappable {
     }
     
     public func mapping(map: Map) {
+        userId   <- (map["userId"])
         street   <- (map["street"])
         suite   <- (map["suite"])
         city   <- (map["city"])
