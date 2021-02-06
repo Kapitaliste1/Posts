@@ -64,6 +64,7 @@ extension UserDetailsViewController{
             self.phoneButton.setTitle(currentUser.phone, for: .normal)
             self.websiteTextView.delegate = self
             self.websiteTextView.text = currentUser.website
+            self.websiteTextView.underlined()
             if let avatar = currentUser.avatar, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "avatar.png"){
                 self.avatarImageView?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
             }

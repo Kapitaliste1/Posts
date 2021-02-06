@@ -143,3 +143,22 @@ extension UIViewController{
         self.present(alertController, animated: true, completion: nil)
     }
 }
+
+
+extension UITextView {
+
+  func underlined() {
+    let border = CALayer()
+    let width = CGFloat(1.0)
+    border.borderColor = self.textColor?.cgColor
+    border.frame = CGRect(x: 0, y: (self.frame.size.height - 12), width:  self.frame.size.width, height: 1)
+    border.borderWidth = width
+    self.layer.addSublayer(border)
+    self.layer.masksToBounds = true
+    let style = NSMutableParagraphStyle()
+    style.lineSpacing = 5
+    let attributes = [NSAttributedString.Key.paragraphStyle : style, NSAttributedString.Key.foregroundColor : self.textColor, NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 13)]
+    self.attributedText = NSAttributedString(string: self.text, attributes: attributes as [NSAttributedString.Key : Any])
+  }
+
+}
