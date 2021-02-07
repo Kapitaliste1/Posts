@@ -9,86 +9,28 @@
 import UIKit
 import MessageUI
 
-class UserDetailsViewController: UIViewController {
+class UserDetailsViewController: UIViewController, CAAnimationDelegate {
     var user : User?
+    var isCompanyCardVisible : Bool = false
     var albumArray : [Album]?
     var photosArray : [Photo]?
- 
+    var panGesture       = UIPanGestureRecognizer()
+    var userInformationView : UserInformationView?
+    var companyDetailView : CompanyDetailView?
+    @IBOutlet weak var detailView: UIView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var emailButton: UIButton!
-    @IBOutlet weak var phoneButton: UIButton!
-    @IBOutlet weak var websiteTextView: UITextView!
     var cellWidth : CGFloat = 150
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerCells()
-        self.setUserDetailsView()
         self.collectionView.reloadData()
-    }
-    
-    
-    @IBAction func emailSendAction(_ sender: UIButton) {
-        if let destinator = sender.title(for: .normal), MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients([destinator])
-            present(mail, animated: true)
-        } else {
-            self.prensentFailedAlert(error: RequestError.emailAccountUnavailable) {}
-        }
-    }
-    
-    @IBAction func phoneCallAction(_ sender: UIButton) {
-        if let phoneNumber = sender.title(for: .normal),
-           let phoneCallURL:URL = URL(string: "tel:\(phoneNumber)") ,
-           UIApplication.shared.canOpenURL(phoneCallURL) {
-            UIApplication.shared.open(phoneCallURL, completionHandler: { _ in
-                
-            })
-        }else{
-           self.prensentFailedAlert(error: RequestError.wrongPhoneNumberFormat) {}
-        }
+        self.setupCardView()
+
     }
     
 }
-
-//MARK: - View set up
-extension UserDetailsViewController{
-    fileprivate func setUserDetailsView(){
-        if let currentUser = self.user{
-            self.usernameLabel.text = currentUser.username
-            self.emailButton.setTitle(currentUser.email, for: .normal)
-            self.phoneButton.setTitle(currentUser.phone, for: .normal)
-            self.websiteTextView.delegate = self
-            self.websiteTextView.text = currentUser.website
-            self.websiteTextView.underlined()
-            if let avatar = currentUser.avatar, let urlImg =  URL(string: avatar), let placeHolder = UIImage(named: "avatar.png"){
-                self.avatarImageView?.sd_setImage(with: urlImg, placeholderImage: placeHolder)
-            }
-        }
-    }
-}
-
-//MARK: - UITextView delegate handler
-extension UserDetailsViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        UIApplication.shared.open(URL)
-        return true
-    }
-    
-}
-
-
-//MARK: - Mail set up
-extension UserDetailsViewController : MFMailComposeViewControllerDelegate{
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true)
-    }
-}
-
 
 //MARK: - Album collection view
 extension UserDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -112,12 +54,12 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
         if let thumnailCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumThumnailCollectionViewCell.identifier, for: indexPath) as? AlbumThumnailCollectionViewCell{
             thumnailCell.widthConstraint.constant = self.cellWidth
             if let albumId = self.albumArray?[indexPath.row].id{
-               PhotoRepository.shared.selectByAlbumId(albumId: albumId, successHandler: { (photoData) in
-                thumnailCell.photo = photoData
-                cell = thumnailCell
-               }) { (_) in
-                
-               }
+                PhotoRepository.shared.selectByAlbumId(albumId: albumId, successHandler: { (photoData) in
+                    thumnailCell.photo = photoData
+                    cell = thumnailCell
+                }) { (_) in
+                    
+                }
             }
         }
         
@@ -150,7 +92,7 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
                     self.navigationController?.present(photoVC, animated: true, completion: nil)
                 }
             }) { (_) in
-             
+                
             }
             
         }
@@ -158,3 +100,78 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
     
 }
 
+//MARK: - Card view
+extension UserDetailsViewController : CardViewDelegate{
+        
+    @objc func draggedView(_ sender:UIPanGestureRecognizer){
+        
+        let translation = sender.translation(in: self.view)
+        
+        if #available(iOS 13.0, *) {
+            let rotationAngle : CGFloat = CGFloat(translation.x * CGFloat.pi / 180)
+            print("## rotationAngle \(abs(rotationAngle))")
+
+            self.detailView.transform3D = CATransform3DRotate(self.detailView.transform3D, rotationAngle, 0, 1, 0)
+            let radians:Double = atan2( Double(detailView.transform3D.m11), Double(detailView.transform3D.m44))
+            let degrees:CGFloat = CGFloat(radians) * (180 / CGFloat.pi )
+            
+            if degrees > 0 {
+                self.userInformationView?.isHidden = false
+                self.companyDetailView?.isHidden = true
+            }else{
+                self.userInformationView?.isHidden = true
+                self.companyDetailView?.isHidden = false
+            }
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        sender.setTranslation(CGPoint.zero, in: self.view)
+    }
+
+    
+    func setupCardView() {
+        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.draggedView(_:)))
+        self.detailView.isUserInteractionEnabled = true
+        self.detailView.addGestureRecognizer(panGesture)
+        
+        if let userData = self.user{
+            
+            self.userInformationView = UserInformationView(frame: self.detailView.bounds)
+            self.userInformationView?.setupView(user: userData)
+            self.userInformationView?.delegate = self
+            self.userInformationView?.isHidden = false
+            if let view = self.userInformationView{
+                self.detailView.addSubview(view)
+            }
+            
+            CompanyRepository.shared.selectByUserId(userId: userData.id) { (company) in
+                self.companyDetailView = CompanyDetailView(frame: self.detailView.bounds)
+                self.companyDetailView?.setupView(company: company)
+                self.companyDetailView?.isHidden = true
+                if let view = self.companyDetailView{
+                    self.detailView.addSubview(view)
+                }
+            } failureHandler: { (error) in
+                self.prensentFailedAlert(error: error) {
+                    
+                }
+            }
+        }
+    }
+    
+    func openEmail(emailComposeVC: MFMailComposeViewController) {
+        self.present(emailComposeVC, animated: true)
+    }
+    
+    func showAlert(error: Error) {
+        self.prensentFailedAlert(error: error) {
+            
+        }
+    }
+ 
+}
+
+
+ 

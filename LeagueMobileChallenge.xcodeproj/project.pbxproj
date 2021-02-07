@@ -12,6 +12,10 @@
 		AB4A933D25CE0FE3000839BB /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4A933C25CE0FE3000839BB /* LoginRepository.swift */; };
 		AB73382825CCEC68004728BA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB73382725CCEC68004728BA /* UIViewExtension.swift */; };
 		AB73383025CCF682004728BA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB73382F25CCF682004728BA /* MessageUI.framework */; };
+		AB87133625CF160700260F1E /* UserInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87133525CF160700260F1E /* UserInformationView.swift */; };
+		AB87133E25CF161200260F1E /* UserInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB87133D25CF161200260F1E /* UserInformationView.xib */; };
+		AB87134425CF1DD500260F1E /* CompanyDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB87134325CF1DD500260F1E /* CompanyDetailView.xib */; };
+		AB87134925CF1DE000260F1E /* CompanyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87134825CF1DE000260F1E /* CompanyDetailView.swift */; };
 		AB91AD1F25CAF16D006417B9 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD1325CAF16D006417B9 /* User+CoreDataClass.swift */; };
 		AB91AD2025CAF16D006417B9 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD1425CAF16D006417B9 /* User+CoreDataProperties.swift */; };
 		AB91AD2125CAF16D006417B9 /* Company+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91AD1525CAF16D006417B9 /* Company+CoreDataClass.swift */; };
@@ -80,6 +84,11 @@
 		AB4A933C25CE0FE3000839BB /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		AB73382725CCEC68004728BA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		AB73382F25CCF682004728BA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		AB87133525CF160700260F1E /* UserInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationView.swift; sourceTree = "<group>"; };
+		AB87133D25CF161200260F1E /* UserInformationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserInformationView.xib; sourceTree = "<group>"; };
+		AB87134325CF1DD500260F1E /* CompanyDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyDetailView.xib; sourceTree = "<group>"; };
+		AB87134825CF1DE000260F1E /* CompanyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailView.swift; sourceTree = "<group>"; };
+		AB87134D25CFAF3C00260F1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AB91AD1325CAF16D006417B9 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AB91AD1425CAF16D006417B9 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AB91AD1525CAF16D006417B9 /* Company+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Company+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -174,12 +183,31 @@
 		40816A92C89E63A0A9F413CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB87134D25CFAF3C00260F1E /* QuartzCore.framework */,
 				AB73382F25CCF682004728BA /* MessageUI.framework */,
 				B5EC5EC130097654F1E0F3C6 /* Pods_LeagueMobileChallenge.framework */,
 				9E973EA07DC680BB29B1002A /* Pods_LeagueMobileChallengeTests.framework */,
 				09417A2435F74B6BBD872D0B /* Pods_LeagueMobileChallengeUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB87133425CF15CF00260F1E /* UserInformationView */ = {
+			isa = PBXGroup;
+			children = (
+				AB87133525CF160700260F1E /* UserInformationView.swift */,
+				AB87133D25CF161200260F1E /* UserInformationView.xib */,
+			);
+			path = UserInformationView;
+			sourceTree = "<group>";
+		};
+		AB87134225CF1D4800260F1E /* CompanyDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				AB87134325CF1DD500260F1E /* CompanyDetailView.xib */,
+				AB87134825CF1DE000260F1E /* CompanyDetailView.swift */,
+			);
+			path = CompanyDetailView;
 			sourceTree = "<group>";
 		};
 		AB9C7B8225CDF6F8007B2EE4 /* Login */ = {
@@ -253,6 +281,8 @@
 		ABF6C23D25CADE3C00D839F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB87134225CF1D4800260F1E /* CompanyDetailView */,
+				AB87133425CF15CF00260F1E /* UserInformationView */,
 				ABED710725CD25010073D580 /* AlbumThumnail */,
 			);
 			path = View;
@@ -531,10 +561,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB87133E25CF161200260F1E /* UserInformationView.xib in Resources */,
 				ABED710B25CD25310073D580 /* AlbumThumnailCollectionViewCell.xib in Resources */,
 				B6AC695C21E6578F0094A9B1 /* LaunchScreen.storyboard in Resources */,
 				AB9C7B8F25CDF745007B2EE4 /* Login.storyboard in Resources */,
 				B6AC695921E6578F0094A9B1 /* Assets.xcassets in Resources */,
+				AB87134425CF1DD500260F1E /* CompanyDetailView.xib in Resources */,
 				ABEFC09225CCC73300E5C233 /* UserDetail.storyboard in Resources */,
 				B6AC695421E6578D0094A9B1 /* Main.storyboard in Resources */,
 				ABF6C26A25CAE10000D839F4 /* PostTableViewCell.xib in Resources */,
@@ -668,6 +700,7 @@
 				AB91AD2225CAF16D006417B9 /* Company+CoreDataProperties.swift in Sources */,
 				AB9C7B7E25CDC15A007B2EE4 /* PhotoRepository.swift in Sources */,
 				ABF6C26725CAE10000D839F4 /* PostTableViewCell.swift in Sources */,
+				AB87133625CF160700260F1E /* UserInformationView.swift in Sources */,
 				AB91AD2925CAF16D006417B9 /* Album+CoreDataClass.swift in Sources */,
 				AB91AD2425CAF16D006417B9 /* Post+CoreDataProperties.swift in Sources */,
 				AB91AD2625CAF16D006417B9 /* Address+CoreDataProperties.swift in Sources */,
@@ -675,6 +708,7 @@
 				AB9C7B7825CDC0CF007B2EE4 /* Photo+CoreDataClass.swift in Sources */,
 				AB91AD2325CAF16D006417B9 /* Post+CoreDataClass.swift in Sources */,
 				AB9C7B7225CDAFC9007B2EE4 /* PhotoViewController.swift in Sources */,
+				AB87134925CF1DE000260F1E /* CompanyDetailView.swift in Sources */,
 				B6AC69A221ECEC740094A9B1 /* APIController.swift in Sources */,
 				B6AC694F21E6578D0094A9B1 /* AppDelegate.swift in Sources */,
 				AB9C7B7925CDC0CF007B2EE4 /* Photo+CoreDataProperties.swift in Sources */,
