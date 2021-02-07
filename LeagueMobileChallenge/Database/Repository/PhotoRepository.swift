@@ -1,8 +1,8 @@
 //
-//  UserRepository.swift
+//  PhotoRepository.swift
 //  LeagueMobileChallenge
 //
-//  Created by Jonathan Ngabo on 2021-02-03.
+//  Created by Jonathan Ngabo on 2021-02-05.
 //  Copyright © 2021 Kelvin Lau. All rights reserved.
 //
 
@@ -10,23 +10,25 @@ import Foundation
 import ObjectMapper
 import CoreData
 
-class UserRepository {
+
+class PhotoRepository {
     
-    static let shared = UserRepository()
+    static let shared = PhotoRepository()
     
-    func downloadUser(successHandler : @escaping ([User]) -> Void, failureHandler : @escaping (Error) -> Void){
-        var users : [User] = [User]()
-        if let url : URL = URL(string: APIController.shared.usersAPI), APIController.shared.checkInternetAvalability(){
+    func downloadPhotos(successHandler : @escaping ([Photo]) -> Void, failureHandler : @escaping (Error) -> Void){
+        var photos : [Photo] = [Photo]()
+        if let url : URL = URL(string: APIController.shared.photosAPI), APIController.shared.checkInternetAvalability(){
             APIController.shared.request(url: url) { (data) in
                 do {
                     if let jsonRawData = data as? Data{
                         let jsonParsed = try JSONSerialization.jsonObject(with: jsonRawData, options: .allowFragments) as! [[String : AnyObject]]
-                        users = Mapper<User>().mapArray(JSONArray:jsonParsed)
-                        APIController.shared.saveBatchInLocalStorage(users) { (savedData) in
-                            successHandler(users)
+                        photos = Mapper<Photo>().mapArray(JSONArray:jsonParsed)
+                        APIController.shared.saveBatchInLocalStorage(photos) { (savedData) in
+                            successHandler(photos)
                         } failureHandler: { (error) in
                             failureHandler(error)
                         }
+                        
                     }
                 } catch let parseError {
                     failureHandler(parseError)
@@ -40,14 +42,12 @@ class UserRepository {
     }
     
     
-    
-    
-    func selectAll(successHandler : @escaping ([User]) -> Void, failureHandler : @escaping (Error) -> Void) {
+    func selectAll(successHandler : @escaping ([Photo]) -> Void, failureHandler : @escaping (Error) -> Void) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
         
         do {
-            if let array = try managedContext.fetch(User.fetchRequest()) as? [User]{
+            if let array = try managedContext.fetch(Photo.fetchRequest()) as? [Photo]{
                 successHandler(array)
             }else{
                 failureHandler(RequestError.fetchDataTransactionFailed)
@@ -57,18 +57,16 @@ class UserRepository {
         }
     }
     
-    
-    func selectById(id : Int16,successHandler : @escaping (User) -> Void, failureHandler : @escaping (Error) -> Void) {
-        let fetchRequest = User.fetchRequest()
+    func selectByAlbumId(albumId : Int16,successHandler : @escaping (Photo) -> Void, failureHandler : @escaping (Error) -> Void) {
+        let fetchRequest = Photo.fetchRequest()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
  
         fetchRequest.fetchLimit = 1
-        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+        fetchRequest.predicate = NSPredicate(format: "albumId == %d", albumId)
 
- 
          do {
-            if let array = try managedContext.fetch(fetchRequest) as? [User], let item = array.first{
+            if let array = try managedContext.fetch(fetchRequest) as? [Photo], let item = array.first{
                 successHandler(item)
             }else{
                 failureHandler(RequestError.fetchDataTransactionFailed)
@@ -78,6 +76,5 @@ class UserRepository {
         }
         
     }
-    
-    
+     
 }

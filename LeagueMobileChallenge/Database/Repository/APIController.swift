@@ -8,16 +8,19 @@
 
 import Foundation
 import Alamofire
+import CoreData
 
 public enum RequestError : Error {
     case userTokenIsNill
     case requestFailed
+    case noInternetConntion
+    case emailAccountUnavailable
+    case wrongPhoneNumberFormat
+    case saveDataTransactionFailed
+    case fetchDataTransactionFailed
 }
 
 class APIController {
-    static let user = "user"
-    static let password = "password"
-    
     static let domain = "https://engineering.league.dev/challenge/api/"
     let loginAPI = domain + "login"
     let usersAPI = domain + "users"
@@ -29,7 +32,7 @@ class APIController {
     
     fileprivate var userToken: String?
     
-    func fetchUserToken(userName: String, password: String, completion: @escaping (Error?) -> Void) {
+    func fetchUserToken(userName: String, password: String, successHandler : @escaping () -> Void, failureHandler : @escaping (Error) -> Void) {
         guard let url = URL(string: loginAPI) else {
             return
         }
@@ -44,24 +47,62 @@ class APIController {
                 if let content = value as? [AnyHashable : Any] {
                     self.userToken = content["api_key"] as? String
                 }
-                completion(nil)
+                successHandler()
             case let .failure(error):
-                completion(error)
+                failureHandler(error)
             }
         }
     }
     
-    func request(url: URL, completion: @escaping (Any?, Error?) -> Void) {
+    func request(url: URL, successHandler : @escaping (Any) -> Void, failureHandler : @escaping (Error) -> Void) {
         guard let userToken = userToken else {
-            NSLog("No user token set")
-            completion(nil, RequestError.userTokenIsNill)
+            failureHandler(RequestError.userTokenIsNill)
             return
         }
         let authHeader: HTTPHeaders = ["x-access-token" : userToken]
         
         AF.request(url, method: .get
-            , parameters: nil, encoding: URLEncoding.default, headers: authHeader).responseJSON { (response) in
-                completion(response.data, response.error)
+                   , parameters: nil, encoding: URLEncoding.default, headers: authHeader).responseJSON { (response) in
+                    switch response.result {
+                    case .success:
+                        successHandler(response.data!)
+                    case .failure(let error):
+                        failureHandler(error)
+                    }
+            }
+        
+    }
+    
+    func checkInternetAvalability() -> Bool {
+        return NetworkReachabilityManager()?.isReachable ?? false
+    }
+    
+    func saveBatchInLocalStorage(_ entitiesData: [NSManagedObject],successHandler : @escaping ([NSManagedObject]) -> Void, failureHandler : @escaping (Error) -> Void) {
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext  =  appdelegate.persistentContainer.viewContext
+        var createdEntities:[NSManagedObject] = [NSManagedObject]()
+
+        for entityData in entitiesData {
+            if let entityName = entityData.entity.name{
+                let entity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedContext)
+                let entityPropertyKey = Array(entityData.entity.attributesByName.keys)
+                let propertiesDictionary = entityData.dictionaryWithValues(forKeys: entityPropertyKey)
+                entity.setValuesForKeys(propertiesDictionary)
+                createdEntities.append(entity)
+            }else{
+                failureHandler(RequestError.saveDataTransactionFailed)
+                break
+            }
+            
+        }
+
+        do{
+            try managedContext.save()
+            successHandler(createdEntities)
+            
+        }catch let savingError{
+            failureHandler(savingError)
+
         }
     }
     
