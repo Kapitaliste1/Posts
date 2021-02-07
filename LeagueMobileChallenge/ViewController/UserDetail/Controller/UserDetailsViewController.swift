@@ -103,14 +103,25 @@ extension UserDetailsViewController : UICollectionViewDelegate, UICollectionView
 //MARK: - Card view
 extension UserDetailsViewController : CardViewDelegate{
         
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = event?.allTouches?.first {
+            let realeasePoint : CGPoint = touch.location(in: touch.view)
+            /*
+             TODO: use the last position touched on the screen to check if it's over the
+             half of the detail View y axis in order to automatically complete the rotation animation
+             */
+            print("## last point \(realeasePoint)")
+             
+
+        }
+    }
+    
     @objc func draggedView(_ sender:UIPanGestureRecognizer){
         
         let translation = sender.translation(in: self.view)
         
         if #available(iOS 13.0, *) {
             let rotationAngle : CGFloat = CGFloat(translation.x * CGFloat.pi / 180)
-            print("## rotationAngle \(abs(rotationAngle))")
-
             self.detailView.transform3D = CATransform3DRotate(self.detailView.transform3D, rotationAngle, 0, 1, 0)
             let radians:Double = atan2( Double(detailView.transform3D.m11), Double(detailView.transform3D.m44))
             let degrees:CGFloat = CGFloat(radians) * (180 / CGFloat.pi )
