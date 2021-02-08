@@ -14,7 +14,7 @@ class CompanyDetailView: UIView {
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var companyBSLabel: UILabel!
     @IBOutlet weak var companyCatchPhraseLabel: UILabel!
-
+    let reverseView : CATransform3D = CATransform3D(m11: -1, m12: 0.0, m13: 0, m14: 0.0, m21: 0.0, m22: 1.0, m23: 0.0, m24: 0.0, m31: -1, m32: 0.0, m33: -1, m34: 0.0, m41: 0.0, m42: 0.0, m43: 0.0, m44: 1.0)
     @IBOutlet var view: UIView!
 
     override init(frame: CGRect) {
@@ -50,6 +50,14 @@ class CompanyDetailView: UIView {
         self.companyNameLabel.text = company.name
         self.companyBSLabel.text = company.bs
         self.companyCatchPhraseLabel.text = company.catchPhrase
+        if #available(iOS 13.0, *) {
+            self.companyBSLabel.transform3D = self.reverseView
+            self.companyNameLabel.transform3D = self.reverseView
+            self.companyCatchPhraseLabel.transform3D = self.reverseView
+        } else {
+            // Fallback on earlier versions
+        }
+
         self.setNeedsDisplay()
     }
     

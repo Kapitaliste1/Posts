@@ -127,9 +127,11 @@ extension UserDetailsViewController : CardViewDelegate{
             let degrees:CGFloat = CGFloat(radians) * (180 / CGFloat.pi )
             
             if degrees > 0 {
+                print("### front view \(self.detailView.transform3D)")
                 self.userInformationView?.isHidden = false
                 self.companyDetailView?.isHidden = true
             }else{
+                print("### back view \(self.detailView.transform3D)")
                 self.userInformationView?.isHidden = true
                 self.companyDetailView?.isHidden = false
             }
