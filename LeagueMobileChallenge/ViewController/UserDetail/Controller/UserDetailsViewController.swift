@@ -109,8 +109,6 @@ extension UserDetailsViewController : CardViewDelegate{
         
         if #available(iOS 13.0, *) {
             let rotationAngle : CGFloat = CGFloat(translation.x * CGFloat.pi / 180)
-            print("## rotationAngle \(abs(rotationAngle))")
-
             self.detailView.transform3D = CATransform3DRotate(self.detailView.transform3D, rotationAngle, 0, 1, 0)
             let radians:Double = atan2( Double(detailView.transform3D.m11), Double(detailView.transform3D.m44))
             let degrees:CGFloat = CGFloat(radians) * (180 / CGFloat.pi )
