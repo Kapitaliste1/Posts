@@ -3,7 +3,7 @@
 //  LeagueMobileChallenge
 //
 //  Created by Jonathan Ngabo on 2021-02-06.
-//  Copyright © 2021 Kelvin Lau. All rights reserved.
+ 
 //
 
 import UIKit

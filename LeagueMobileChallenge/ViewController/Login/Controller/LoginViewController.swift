@@ -3,7 +3,7 @@
 //  LeagueMobileChallenge
 //
 //  Created by Jonathan Ngabo on 2021-02-05.
-//  Copyright © 2021 Kelvin Lau. All rights reserved.
+ 
 //
 
 import UIKit
@@ -32,10 +32,10 @@ class LoginViewController: UIViewController {
             LoginRepository.shared.login(username: username, password: password) {
                 self.view.isUserInteractionEnabled = true
                 self.stopActivityIndicator(activityIndicatorView: indicator)
-                let story = UIStoryboard(name: StoryboardIdenfiers.Home.rawValue, bundle:nil)
-                let vc = story.instantiateInitialViewController()
-                UIApplication.shared.windows.first?.rootViewController = vc
-                UIApplication.shared.windows.first?.makeKeyAndVisible()
+                if let vc = self.navigateTo(storyboard: .Home){
+                    UIApplication.shared.windows.first?.rootViewController = vc
+                    UIApplication.shared.windows.first?.makeKeyAndVisible()
+                }
             } failureHandler: { (error) in
                 self.view.isUserInteractionEnabled = true
                 self.prensentFailedAlert(error: error) {
