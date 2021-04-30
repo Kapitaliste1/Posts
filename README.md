@@ -2,4 +2,4 @@
 
 Hello, 
 
-You just need to run 'Pod install' and the project will be good to test.
+You just need to update the swift package modules to the latest version and you'll be good to go.
