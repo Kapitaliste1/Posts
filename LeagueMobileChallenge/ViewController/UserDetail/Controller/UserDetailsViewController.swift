@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import CoreDataPackage
 
 class UserDetailsViewController: UIViewController, CAAnimationDelegate {
     var user : User?

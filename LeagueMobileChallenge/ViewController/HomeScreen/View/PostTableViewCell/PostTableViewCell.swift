@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import CoreDataPackage
 
 protocol PostTableViewCellProtocol {
     func showUserDetail(user : User)

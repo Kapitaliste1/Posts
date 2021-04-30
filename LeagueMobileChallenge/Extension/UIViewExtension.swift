@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreDataPackage
 
 //MARK:- Enumerations
 /*
@@ -63,7 +63,7 @@ extension UIViewController{
     }
     
     func setupActivityIndicator() -> UIActivityIndicatorView{
-        let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        let activityIndicatorView = UIActivityIndicatorView(style: .medium)
         activityIndicatorView.center = self.view.center
         self.view.addSubview(activityIndicatorView)
         activityIndicatorView.isHidden = true

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreDataPackage
 
 class AlbumThumnailCollectionViewCell: UICollectionViewCell {
     static let identifier : String = "AlbumThumnailCollectionViewCell"

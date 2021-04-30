@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import CoreDataPackage
 
 protocol CardViewDelegate {
     func openEmail(emailComposeVC : MFMailComposeViewController)

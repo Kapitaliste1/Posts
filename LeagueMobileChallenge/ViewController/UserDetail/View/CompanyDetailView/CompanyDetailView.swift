@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreDataPackage
 
   
 class CompanyDetailView: UIView {
